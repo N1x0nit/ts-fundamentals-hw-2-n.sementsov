@@ -4,10 +4,10 @@ import Pagination from "./pagination";
 
 const pagination = new Pagination();
 let query = "";
-const searchForm = document.querySelector(".form");
-const loadMoreButton = document.querySelector(".load-more");
-const gallery = document.querySelector(".gallery");
-const loader = document.querySelector(".loader");
+const searchForm = document.querySelector(".form") as HTMLFormElement;
+const loadMoreButton = document.querySelector(".load-more") as HTMLButtonElement;
+const gallery = document.querySelector(".gallery") as HTMLElement;
+const loader = document.querySelector(".loader") as HTMLElement; 
 
 if (!searchForm) throw new Error("Missing .form element in HTML");
 if (!loadMoreButton) throw new Error("Missing .load-more element in HTML");
@@ -19,12 +19,12 @@ const ui = initRender({ gallery, loader, loadMoreButton });
 
 searchForm.addEventListener("submit", onFormSubmit);
 loadMoreButton.addEventListener("click", onLoadMoreClick);
-
-async function onFormSubmit(event) {
+  
+async function onFormSubmit(event: SubmitEvent): Promise<void> {
   event.preventDefault();
-  const form = event.target;
+  const form = event.target as HTMLFormElement;
   const formData = new FormData(form);
-  query = formData.get("search-text").trim();
+  query = formData.get("search-text")?.toString().trim() || "";
 
   if (query === "") {
     ui.showToast("Please enter a search query.");
