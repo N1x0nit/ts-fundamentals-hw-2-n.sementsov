@@ -3,7 +3,7 @@ import type { PixabayResponse } from "./types/pixabay";
 import { PER_PAGE } from "./pagination";
 
 export const getImagesByQuery = async (query: string, page: number): Promise<PixabayResponse> => {
-  const response = await axios.get<PixabayResponse>(`https://pixabay.com/api/`, {
+  const response = await axios.get<PixabayResponse>(`https://pixabay.com/api/54672520-bd018dbfea1f03d1ff8e0ac40`, {
     params: {
       q: query,
       page,
